@@ -3,10 +3,10 @@
 import pendulum, requests, time, copy, backoff
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable, cast, Callable
+from typing import Any, Dict, Optional, Union, Iterable, cast, Callable
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
-from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
+from singer_sdk.exceptions import  RetriableAPIError
 
 
 from singer_sdk.streams import RESTStream
@@ -123,7 +123,14 @@ class CoingeckoStream(RESTStream):
             row['total_volume_usd'] = market_data.get('total_volume').get('usd')
         
         row['date'] = row['date'].strftime("%Y-%m-%d")
-        row['token'] = context['token']
+
+        mapping_exists= self.config.get('token_mapping') and self.config.get('token_mapping').get(context.get('token'))
+
+        if mapping_exists:
+            row['token'] = self.config.get('token_mapping').get(context.get('token'))
+            return row
+
+        row['token'] = context.get('token')
         return row
 
 

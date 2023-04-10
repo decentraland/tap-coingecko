@@ -48,7 +48,24 @@ class TapCoingecko(Tap):
             required=True,
             description="Number of seconds to wait between requests",
             default=5
+        ),
+        th.Property(
+            "token_mapping",
+            th.ObjectType(additional_properties=True),
+            required=False,
+            description="Mapping of token names to coingecko's token names",
+            default={
+                "decentraland": "MANA",
+                "ethereum": "ETH",
+                "dai": "DAI",
+                "matic-network": "MATIC",
+                "bitcoin": "BTC",
+                "binancecoin": "BNB",
+                "tether": "USDT",
+                "usd-coin": "USDC",
+            }
         )
+        
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:

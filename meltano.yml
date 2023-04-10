@@ -16,7 +16,7 @@ plugins:
         - about
         - stream-maps
       config:
-        start_date: "2023-04-05T00:00:00Z"
+        start_date: "2023-04-01T00:00:00Z"
         tokens: "ethereum,dai"
         api_url: "https://api.coingecko.com/api/v3"
       settings:
@@ -24,6 +24,7 @@ plugins:
         - name: tokens
         - name: api_url
         - name: wait_time_between_requests
+        - name: token_mapping
   loaders:
     - name: target-jsonl
       variant: andyh1203
