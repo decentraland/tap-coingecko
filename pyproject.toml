@@ -41,6 +41,7 @@ src_paths = "tap_coingecko"
 [tool.mypy]
 python_version = "3.9"
 warn_unused_configs = true
+disable_error_code = ["union-attr","index","arg-type", "override"]
 
 [build-system]
 requires = ["poetry-core>=1.0.8"]

@@ -1,22 +1,17 @@
 """Coingecko tap class."""
-
-from importlib.metadata import requires
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-from tap_coingecko.streams import (
-    CoingeckoStream,
-)
+from tap_coingecko.streams import CoingeckoStream
 
-STREAM_TYPES = [
-    CoingeckoStream
-]
+STREAM_TYPES = [CoingeckoStream]
 
 
 class TapCoingecko(Tap):
     """Coingecko tap class."""
+
     name = "tap-coingecko"
 
     # TODO: Update this section with the actual config values you expect:
@@ -25,29 +20,29 @@ class TapCoingecko(Tap):
             "tokens",
             th.StringType,
             required=True,
-            description="The name of the tokens to import the price history of separated by commas",
-            default="ethereum"
+            description="The name of the tokens to import",
+            default="ethereum",
         ),
         th.Property(
             "api_url",
             th.StringType,
             required=True,
             description="Coingecko's api url",
-            default="https://api.coingecko.com/api/v3"
+            default="https://api.coingecko.com/api/v3",
         ),
         th.Property(
             "start_date",
             th.StringType,
             required=True,
-            description="First date to obtain token data price for, this will be used for all tokens in the list and may result in empty price data for some tokens",
-            default="2022-03-01"
+            description="First date to obtain token data price for",
+            default="2022-03-01",
         ),
         th.Property(
             "wait_time_between_requests",
             th.IntegerType,
             required=True,
             description="Number of seconds to wait between requests",
-            default=5
+            default=5,
         ),
         th.Property(
             "token_mapping",
@@ -63,9 +58,8 @@ class TapCoingecko(Tap):
                 "binancecoin": "BNB",
                 "tether": "USDT",
                 "usd-coin": "USDC",
-            }
-        )
-        
+            },
+        ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
