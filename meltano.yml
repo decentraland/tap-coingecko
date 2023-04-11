@@ -1,5 +1,5 @@
 version: 1
-send_anonymous_usage_stats: true
+send_anonymous_usage_stats: false
 project_id: "tap-coingecko"
 default_environment: test
 environments:
