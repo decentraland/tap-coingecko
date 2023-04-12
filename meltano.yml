@@ -1,20 +1,15 @@
 version: 1
 send_anonymous_usage_stats: false
 project_id: "tap-coingecko"
-default_environment: test
-environments:
-  - name: test
 plugins:
   extractors:
     - name: "tap-coingecko"
       namespace: "tap_coingecko"
-      pip_url: -e .
+      executable: ./tap-coingecko.sh
       capabilities:
         - state
         - catalog
         - discover
-        - about
-        - stream-maps
       config:
         start_date: "2023-04-01T00:00:00Z"
         tokens: "ethereum,dai"
