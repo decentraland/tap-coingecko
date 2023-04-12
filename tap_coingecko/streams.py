@@ -15,7 +15,7 @@ from singer_sdk.streams import RESTStream
 
 class CoingeckoStream(RESTStream):
     name = "coingecko_token"
-    primary_keys = ["date"]
+    primary_keys = ["token","date"]
     replication_key = "date"
     replication_method = "INCREMENTAL"
     is_sorted = True
