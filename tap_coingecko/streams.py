@@ -15,7 +15,7 @@ from singer_sdk.streams import RESTStream
 
 class CoingeckoStream(RESTStream):
     name = "coingecko_token"
-    primary_keys = ["token","date"]
+    primary_keys = ["token", "date"]
     replication_key = "date"
     replication_method = "INCREMENTAL"
     is_sorted = True
@@ -87,7 +87,7 @@ class CoingeckoStream(RESTStream):
         old_token = (
             previous_token
             or self.get_starting_replication_key_value(context)
-            or self.config["coingecko_start_date"]
+            or self.config.get("start_date")
         )
         if isinstance(old_token, str):
             old_token = cast(datetime, pendulum.parse(old_token))
